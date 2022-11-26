@@ -1,0 +1,613 @@
+{
+ "swagger": "2.0",
+ "info": {
+  "version": "1.0.0",
+  "title": "tinyinsta-web.appspot.com"
+ },
+ "host": "tinyinsta-web.appspot.com",
+ "basePath": "/_ah/api",
+ "schemes": [
+  "https"
+ ],
+ "consumes": [
+  "application/json"
+ ],
+ "produces": [
+  "application/json"
+ ],
+ "paths": {
+  "/tinyinsta/v1/follow/{targetId}": {
+   "post": {
+    "description": "Follow an other user and update follower count",
+    "operationId": "TinyinstaFollowById",
+    "parameters": [
+     {
+      "name": "targetId",
+      "in": "path",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "fakeUser",
+      "in": "query",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/UserDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/posts": {
+   "get": {
+    "description": "Gets all posts for a given user ID",
+    "operationId": "TinyinstaGetAll",
+    "parameters": [
+     {
+      "name": "authorId",
+      "in": "query",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/PostDTOCollection"
+      }
+     }
+    }
+   },
+   "post": {
+    "description": "Creates a non-published post in the database and returns a signed URL so the client can upload to Google Cloud Storage",
+    "operationId": "TinyinstaUploadPost",
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "required": false,
+      "schema": {
+       "$ref": "#/definitions/JsonMap"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/PostDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/posts/{id}/likes": {
+   "post": {
+    "description": "Adds a like into a given post and returns the number of likes on it",
+    "operationId": "TinyinstaUpdateLikes",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "fakeUser",
+      "in": "query",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/PostDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/posts/{id}/publish": {
+   "post": {
+    "description": "Verifies the existence of the file after upload and publishes the post to the user's followers",
+    "operationId": "TinyinstaPublishPost",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/PostDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/timeline": {
+   "get": {
+    "description": "Returns the user's timeline with a given limit on the number of posts and possibly a cursor.",
+    "operationId": "TinyinstaGetTimeline",
+    "parameters": [
+     {
+      "name": "after",
+      "in": "query",
+      "required": false,
+      "type": "string"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/PaginationDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/users/explore": {
+   "get": {
+    "description": "Gets 10 random users",
+    "operationId": "TinyinstaGetRandom",
+    "parameters": [ ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/UserDTOCollection"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/users/fake": {
+   "post": {
+    "description": "Create fake users for testing purposes without Authorization tokens",
+    "operationId": "TinyinstaCreateFakeUser",
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "required": false,
+      "schema": {
+       "$ref": "#/definitions/JsonMap"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/UserDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/tinyinsta/v1/users/handle/{handle}": {
+   "get": {
+    "description": "Gets the user profile given a handle",
+    "operationId": "TinyinstaGetUserByHandle",
+    "parameters": [
+     {
+      "name": "handle",
+      "in": "path",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/UserDTO"
+      }
+     }
+    }
+   }
+  },
+  "/tinyinsta/v1/users/me": {
+   "get": {
+    "description": "Returns the user's data and creates the user if needed",
+    "operationId": "TinyinstaGetSelf",
+    "parameters": [ ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/UserDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   },
+   "put": {
+    "description": "Update the user's data",
+    "operationId": "TinyinstaUpdateSelf",
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "required": false,
+      "schema": {
+       "$ref": "#/definitions/JsonMap"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response",
+      "schema": {
+       "$ref": "#/definitions/UserDTO"
+      }
+     }
+    },
+    "security": [
+     {
+      "google_id_token": [ ]
+     },
+     {
+      "google_id_token_https": [ ]
+     }
+    ],
+    "x-security": [
+     {
+      "google_id_token": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     },
+     {
+      "google_id_token_https": {
+       "audiences": [
+        "238318403831-upps8pc0cjj0n1nt33r7tl7kfqr3uko1.apps.googleusercontent.com"
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "securityDefinitions": {
+  "google_id_token_https": {
+   "type": "oauth2",
+   "authorizationUrl": "",
+   "flow": "implicit",
+   "x-google-issuer": "https://accounts.google.com",
+   "x-google-jwks_uri": "https://www.googleapis.com/oauth2/v1/certs"
+  },
+  "google_id_token": {
+   "type": "oauth2",
+   "authorizationUrl": "",
+   "flow": "implicit",
+   "x-google-issuer": "accounts.google.com",
+   "x-google-jwks_uri": "https://www.googleapis.com/oauth2/v1/certs"
+  }
+ },
+ "definitions": {
+  "UserDTOCollection": {
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/UserDTO"
+     }
+    }
+   }
+  },
+  "UserDTO": {
+   "properties": {
+    "createdAt": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "email": {
+     "type": "string"
+    },
+    "followers": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "handle": {
+     "type": "string"
+    },
+    "hasFollowed": {
+     "type": "boolean"
+    },
+    "id": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "pictureURL": {
+     "type": "string"
+    },
+    "updatedAt": {
+     "type": "string",
+     "format": "date-time"
+    }
+   }
+  },
+  "PaginationDTO": {
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/PostDTO"
+     }
+    },
+    "next": {
+     "type": "string"
+    },
+    "previous": {
+     "type": "string"
+    }
+   }
+  },
+  "PostDTO": {
+   "properties": {
+    "author": {
+     "$ref": "#/definitions/UserDTO"
+    },
+    "authorId": {
+     "type": "string"
+    },
+    "createdAt": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "description": {
+     "type": "string"
+    },
+    "hasLiked": {
+     "type": "boolean"
+    },
+    "id": {
+     "type": "string"
+    },
+    "likes": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "mediaURL": {
+     "type": "string"
+    },
+    "published": {
+     "type": "boolean"
+    },
+    "title": {
+     "type": "string"
+    },
+    "uploadURL": {
+     "type": "string"
+    }
+   }
+  },
+  "PostDTOCollection": {
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/PostDTO"
+     }
+    }
+   }
+  },
+  "JsonMap": { }
+ }
+}

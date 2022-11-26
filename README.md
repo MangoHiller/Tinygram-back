@@ -121,8 +121,6 @@ mvn clean appengine:run # démarre le serveur sur le port 8080
 
 - L'explorateur d'API est situé à [localhost:8080/\_ah/api/explorer](http://localhost:8080/_ah/api/explorer)
 
-- L'émulateur de Datastore est situé à [localhost:8080/\_ah/admin](http://localhost:8080/_ah/admin)
-
 ## Déployer sur Google App Engine
 
 ### Créer et déployer la version sur Google App Engine
